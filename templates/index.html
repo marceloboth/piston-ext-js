@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Ext JS 4 MVC Tutorial</title>
+		<!-- Ext JS Files -->
+		<link rel="stylesheet" type="text/css"
+		href="/static/js/extjs-4.1.0/resources/css/ext-all.css">
+		<script type="text/javascript" src="/static/js/extjs-4.1.0/ext-debug.js"></script>
+		<!-- App Files -->
+		<link rel="stylesheet" type="text/css" href="/static/css/app.css">
+		<script type="text/javascript" src="/static/js/app/app.js"></script>
+		<script type="text/javascript">
+			Ext.onReady(function() {
+				Ext.require(["Ext.util.Cookies", "Ext.Ajax"], function() {
+					// Add csrf token to every ajax request
+					var token = Ext.util.Cookies.get('csrftoken');
+					if(!token) {
+						Ext.Error.raise("Missing csrftoken cookie");
+					} else {
+						Ext.Ajax.defaultHeaders = Ext.apply(Ext.Ajax.defaultHeaders || {}, {
+							'X-CSRFToken' : token
+						});
+					}
+				});
+			});
+
+		</script>
+	</head>
+	<body></body>
+</html>
